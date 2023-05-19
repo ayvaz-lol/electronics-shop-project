@@ -1,4 +1,5 @@
 import csv
+import math
 
 
 class InstantiateCSVError(Exception):
@@ -43,14 +44,14 @@ class Item:
         try:
             with open(file_path, newline='', encoding='windows-1251') as csvfile:
                 reader = csv.DictReader(csvfile)
-                item_list = []
+                all = []
                 for row in reader:
                     if len(row.keys()) == 3:
                         if cls.is_integer(float(row['price'])):
                             row['price'] = int(float(row['price']))
                         if cls.is_integer(float(row['quantity'])):
                             row['quantity'] = int(float(row['quantity']))
-                        item_list.append(cls(row['name'], row['price'], row['quantity']))
+                        all.append(cls(row['name'], row['price'], row['quantity']))
                     else:
                         raise InstantiateCSVError
         except FileNotFoundError:
@@ -62,11 +63,14 @@ class Item:
             print(message)
             return message
         else:
-            return item_list
+            return all
 
     @staticmethod
-    def string_to_number():
-        pass
+    def string_to_number(number: str):
+        number = float(number)
+        number = int(number)
+        rounded_num = round(number)
+        return rounded_num
 
     def calculate_total_price(self) -> float:
         """
@@ -80,3 +84,7 @@ class Item:
         """
         self.price *= self.pay_rate
         return self.price
+
+    @classmethod
+    def is_integer(cls, param):
+        assert type(param) == float
