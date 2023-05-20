@@ -11,7 +11,7 @@ if __name__ == '__main__':
     # длина наименования товара больше 10 символов
     #item.name = 'Смартфон'
     # Exception: Длина наименования товара превышает 10 символов.
-    items_csv_path = 'items.csv'# Путь к файлу csv
+    items_csv_path = '../src/items.csv'  # Путь к файлу csv
     Item.instantiate_from_csv(items_csv_path)  # создание объектов из данных файла
 
     assert len(Item.all) == 5                                          # в файле 5 записей с данными по товарам

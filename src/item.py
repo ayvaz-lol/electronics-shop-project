@@ -41,6 +41,7 @@ class Item:
     def instantiate_from_csv(cls, file_path) -> list:
         '''Считывает данные из csv-файла и создает экземпляры класса,
                 инициализируя их данными из файла'''
+        cls.all = []
         try:
             with open(file_path, newline='', encoding='windows-1251') as csvfile:
                 reader = csv.DictReader(csvfile)
